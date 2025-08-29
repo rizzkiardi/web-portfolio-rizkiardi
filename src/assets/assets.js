@@ -3,7 +3,7 @@ import css3 from "./icons/CSS3.png";
 import javascript from "./icons/JavaScript.png";
 import figma from "./icons/Figma.png";
 import tailwindcss from "./icons/Tailwind-CSS.png";
-import vite from "./icons/vite-js.png";
+import vite from "./icons/Vite-js.png";
 import react from "./icons/React.png";
 import github from "./icons/GitHub.png";
 import typescript from "./icons/TypeScript.png";
