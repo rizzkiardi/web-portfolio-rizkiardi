@@ -1,4 +1,4 @@
-import html5 from "./icons/html5.png";
+import html5 from "./icons/HTML5.png";
 import css3 from "./icons/CSS3.png";
 import javascript from "./icons/JavaScript.png";
 import figma from "./icons/Figma.png";
