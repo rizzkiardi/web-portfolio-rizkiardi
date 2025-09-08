@@ -53,7 +53,7 @@ const Navbar = () => {
           </li>
           <li>
             <a
-              href="/CV-RizkiSeptiArdi.pdf"
+              href="/Resume - Rizki Septi Ardi.pdf"
               download
               className="flex hover:text-[#FFFFFF]"
             >
@@ -102,7 +102,7 @@ const Navbar = () => {
           </li>
           <li>
             <a
-              href="/CV-RizkiSeptiArdi.pdf"
+              href="Resume - Rizki Septi Ardi.pdf"
               download
               className="flex hover:text-[#FFFFFF]"
               onClick={closeMenu}

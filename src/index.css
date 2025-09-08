@@ -212,3 +212,23 @@ html {
 .animate-zoomIn {
   animation: zoomIn 0.3s ease forwards;
 }
+
+/* scroolbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #191919;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b7383;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a4a8b1;
+}

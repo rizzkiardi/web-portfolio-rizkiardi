@@ -1,12 +1,130 @@
 import { assets } from "@/assets/assets";
-import { motion } from "framer-motion";
+import { Marquee } from "@/components/magicui/marquee";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Particles } from "../magicui/particles";
 import { ShimmerButton } from "../magicui/shimmer-button";
+import CertificateModal from "../ui/CertificateModal";
 import Footer from "../ui/Footer";
 import Navbar from "../ui/Navbar";
-import { useState } from "react";
-import CertificateModal from "../ui/CertificateModal";
-import HamburgerMenu from "../ui/HamburgerMenu";
+import { motion, AnimatePresence } from "framer-motion";
+
+const myCertificate = [
+  {
+    name: "Sertifikat - Memulai Dasar Pemrograman untuk Menjadi Pengembang Software",
+    img: assets.sertifikat_dasar_pemrograman,
+  },
+  {
+    name: "Sertifikat - Solo Learn Web Development",
+    img: assets.sertifikat_solo_learn,
+  },
+  {
+    name: "Sertifikat - Belajar Penerapan Machine Learning dengan Google Cloud",
+    img: assets.sertifikat_machine_learning,
+  },
+  {
+    name: "Sertifikat - Belajar Membuat Aplikasi Back-End untuk Pemula dengan Google Cloud",
+    img: assets.sertifikat_aplikasi_backend,
+  },
+  {
+    name: "Sertifikat - Belajar Dasar Pemrograman Javascript",
+    img: assets.sertifikat_dasar_js,
+  },
+  {
+    name: "Sertifikat - Belajar Dasar Git dengan GitHub",
+    img: assets.sertifikat_dasar_git,
+  },
+  {
+    name: "Sertifikat - Belajar Dasar Pemrograman Web",
+    img: assets.sertifikat_dasar_web,
+  },
+  {
+    name: "CERTIFICATE freecodecamp - Responsive Web Design",
+    img: assets.sertifikat_freecodecamp_responsive,
+  },
+  {
+    name: "Sertifikat - Belajar Membuat Front End Web Pemula",
+    img: assets.sertifikat_fe_pemula,
+  },
+  {
+    name: "Sertifikat - Belajar Fundamental Front-End Web Development",
+    img: assets.sertifikat_fundamental_fe_web,
+  },
+  {
+    name: "Sertifikat - Menjadi Front-End Web Developer Expert",
+    img: assets.sertifikat_fe_expert,
+  },
+  {
+    name: "Sertifikat - Student Developer Initiative Code Generations and Optimization",
+    img: assets.sertifikat_IBM,
+  },
+];
+
+const firstRow = myCertificate.slice(0, myCertificate.length / 2);
+const secondRow = myCertificate.slice(myCertificate.length / 2);
+
+const MyCertificateCard = ({ name, img }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      {/* Card */}
+      <figure
+        onClick={() => setIsOpen(true)}
+        className={cn(
+          "relative h-full w-64 cursor-pointer overflow-hidden rounded-xl p-3"
+        )}
+      >
+        <div className="flex flex-row items-center gap-2">
+          <img className="rounded-sm" width="400px" alt={name} src={img} />
+        </div>
+      </figure>
+
+      {/* Modal */}
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="fixed inset-0 z-[50] flex items-center justify-center bg-[#191919]/85"
+              onClick={() => setIsOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <motion.div
+                className="relative w-full max-w-6xl h-auto"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <img
+                  src={img}
+                  alt={name}
+                  className="w-full h-full rounded-lg shadow-lg"
+                />
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="absolute flex items-center -top-8 right-0 border text-white px-2 py-0 lg:px-3 rounded-sm transition"
+                >
+                  <img
+                    className="w-5 lg:w-6"
+                    src={assets.cross_orange}
+                    alt=""
+                  />
+                  <span className="mr-2 text-sm">Close</span>
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
+  );
+};
 
 const About = () => {
   const [showCertificate, setShowCertificate] = useState(false);
@@ -78,11 +196,7 @@ const About = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
-                  src={assets.github_icon_white}
-                  alt="Logo Github"
-                  width="25"
-                />
+                <img src={assets.github_white} alt="Logo Github" width="25" />
               </a>
               <a
                 href="https://linkedin.com/in/rizkiardi"
@@ -118,7 +232,7 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-md text-start underline decoration decoration-[#FCCA46]"
             >
-              Web Developer | Undergraduate Computer Science
+              Web Developer | Undergraduate Information Technology
             </motion.h2>
 
             <motion.div
@@ -128,13 +242,12 @@ const About = () => {
               className="my-5 text-center font-semibold"
             >
               <p className="text-md max-lg:text-sm font-thin leading-7 text-start ">
-                I am a Bachelor of Computer Science graduate from the University
-                of Muhammadiyah Purworejo (GPA 3.49) with a passion for
-                technology and a proven commitment to delivering impactful
+                I am a Bachelor of Information Technology graduate from the
+                University of Muhammadiyah Purworejo (GPA 3.49) with a passion
+                for technology and a proven commitment to delivering impactful
                 digital solutions. With expertise in React.js and Laravel,
                 supported by strong skills in HTML, CSS, and JavaScript. I
-                specialize in building modern, responsive, and high-quality web
-                applications.
+                specialize in building modern, and responsive web applications.
               </p>
             </motion.div>
 
@@ -144,7 +257,7 @@ const About = () => {
               transition={{ duration: 0.6, delay: 1 }}
             >
               <p className="mb-2 text-md">Tools I use</p>
-              <div className="flex gap-3 max-lg:gap-2">
+              <div className="flex flex-wrap gap-3 max-lg:gap-2">
                 <img src={assets.html5} alt="Logo HTML5" className="w-[50px]" />
                 <img src={assets.css3} alt="Logo CSS3" className="w-[50px]" />
                 <img
@@ -161,12 +274,13 @@ const About = () => {
                 <img src={assets.vite} alt="Logo Vite" className="w-[50px]" />
                 <img src={assets.react} alt="Logo React" className="w-[50px]" />
                 <img
-                  src={assets.github_icon_white}
+                  src={assets.github_white}
                   alt="Logo GitHub"
                   className="w-[50px]"
                 />
+
                 <img
-                  src={assets.nextjs}
+                  src={assets.nextjs_white}
                   alt="Logo Next JS"
                   className="w-[50px]"
                 />
@@ -180,77 +294,19 @@ const About = () => {
           </div>
         </div>
 
+        {/* Start MSIB */}
         <section className="w-full bg-[#2D2D2D] py-20">
           <div className="max-w-6xl mx-auto max-lg:px-6">
-            {/* Study Independent */}
             <h2
               className="text-white text-2xl font-semibold text-start underline decoration-2 decoration-[#FCCA46]
             "
               data-aos="fade-up"
               data-aos-duration="1000"
             >
-              Study Independent
+              Magang & Studi Independent Bersertifikat
             </h2>
 
             <div className="work-card my-5 flex-col lg:flex lg:flex-row lg:space-x-10">
-              {/* Hacktiv 8 */}
-              <div
-                className="flex flex-col gap-3 lg:flex-1"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay="300"
-              >
-                {/* Kiri */}
-                <div className=" flex gap-3 items-start md:items-center w-full md:w-auto">
-                  <img
-                    src={assets.hacktiv8_logo}
-                    alt="Logo Hacktiv8"
-                    className="w-[75px] md:w-[100px]"
-                  />
-
-                  <div className="flex flex-col">
-                    <p className="text-md font-semibold">
-                      Student Developer Initiative
-                    </p>
-                    <p className="text-sm mb-1">
-                      Code Generations and Optimization.
-                    </p>
-
-                    {/* Years untuk mobile */}
-                    <p className="text-sm mt-1">22 & 24 July 2025</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setActiveCertificate("hacktiv8")}
-                  className="w-[100px] rounded-sm border hover:shadow-lg transition-transform hover:scale-105 cursor-pointer"
-                >
-                  Certificate
-                </button>
-
-                {/* description */}
-                <details className="group mb-5 ">
-                  <summary className="flex cursor-pointer items-center gap-2 list-none">
-                    <span className=" transition-transform duration-500 group-open:rotate-90">
-                      ▶
-                    </span>
-                    <span className="">Job Description</span>
-                  </summary>{" "}
-                  <p>
-                    As part of the Student Developer Initiative under the Code
-                    Generations and Optimization program, I explored the
-                    application of IBM Watsonx AI to generate and optimize code
-                    effectively.
-                  </p>
-                </details>
-              </div>
-
-              {activeCertificate === "hacktiv8" && (
-                <CertificateModal
-                  src={assets.hacktiv8_certificate}
-                  onClose={() => setActiveCertificate(null)}
-                />
-              )}
-
               {/* Bangkit */}
               <div
                 className="mt-5 flex flex-col gap-3 lg:mt-0 lg:flex-1"
@@ -259,7 +315,7 @@ const About = () => {
                 data-aos-delay="300"
               >
                 {/* Kiri */}
-                <div className=" flex gap-3 items-start md:items-center w-full md:w-auto">
+                <div className="flex gap-3 items-start md:items-center w-full md:w-auto">
                   <img
                     src={assets.bangkit_logo}
                     alt="Logo Bangkit"
@@ -300,10 +356,10 @@ const About = () => {
                   </p>
                 </details>
               </div>
-
               {activeCertificate === "bangkit" && (
                 <CertificateModal
                   src={assets.bangkit_certificate}
+                  isOpen={true}
                   onClose={() => setActiveCertificate(null)}
                 />
               )}
@@ -342,7 +398,7 @@ const About = () => {
                 {/* description */}
                 <details className="group mb-5">
                   <summary className="flex cursor-pointer items-center gap-2 list-none">
-                    <span className=" transition-transform duration-500 group-open:rotate-90">
+                    <span className="transition-transform duration-500 group-open:rotate-90">
                       ▶
                     </span>
                     <span className="">Job Description</span>
@@ -362,6 +418,7 @@ const About = () => {
               {activeCertificate === "sib" && (
                 <CertificateModal
                   src={assets.sib_certificate}
+                  isOpen={true}
                   onClose={() => setActiveCertificate(null)}
                 />
               )}
@@ -374,10 +431,10 @@ const About = () => {
                 data-aos="fade-up"
                 data-aos-duration="1000"
               >
-                Work Experience
+                Work Experiences
               </h2>
 
-              <div className="work-card my-5 md:w-[70%]">
+              <div className="work-card my-5 md:w-[85%] lg:w-[70%]">
                 {/* Astra Daihatsu Motor */}
                 <div
                   className="flex flex-col md:flex-row md:items-center md:justify-between gap-3"
@@ -499,8 +556,78 @@ const About = () => {
                 </div>
               </div>
             </div>
+
+            {/* My Certificate */}
+            {/* <div className="mt-20">
+              <h2
+                className="text-white text-2xl font-semibold text-start underline decoration-2 decoration-[#FCCA46]"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                My Certificates
+              </h2>
+
+              <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+                <Marquee pauseOnHover className="[--duration:20s]">
+                  {firstRow.map((myCertificate) => (
+                    <MyCertificateCard
+                      key={myCertificate.name}
+                      {...myCertificate}
+                    />
+                  ))}
+                </Marquee>
+                <Marquee reverse pauseOnHover className="[--duration:20s]">
+                  {secondRow.map((myCertificate) => (
+                    <MyCertificateCard
+                      key={myCertificate.name}
+                      {...myCertificate}
+                    />
+                  ))}
+                </Marquee>
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#2d2d2d]"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#2d2d2d]"></div>
+              </div>
+            </div> */}
           </div>
         </section>
+        {/* End MSIB */}
+
+        {/* Start My Certificate */}
+        <section className="w-full bg-[#191919] py-20">
+          <div className="w-full max-w-6xl mx-auto px-0">
+            <div className="">
+              <h2
+                className="text-white text-2xl font-semibold text-end underline decoration-2 decoration-[#FCCA46] px-6 lg:px-0 mb-5"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                My Certificates
+              </h2>
+
+              <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+                <Marquee pauseOnHover className="[--duration:20s]">
+                  {firstRow.map((myCertificate) => (
+                    <MyCertificateCard
+                      key={myCertificate.name}
+                      {...myCertificate}
+                    />
+                  ))}
+                </Marquee>
+                <Marquee reverse pauseOnHover className="[--duration:20s]">
+                  {secondRow.map((myCertificate) => (
+                    <MyCertificateCard
+                      key={myCertificate.name}
+                      {...myCertificate}
+                    />
+                  ))}
+                </Marquee>
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#191919]"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#191919]"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* End My Certificate */}
       </main>
 
       <Footer />

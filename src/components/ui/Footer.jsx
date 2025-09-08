@@ -19,11 +19,7 @@ const Footer = () => {
               </Link>
 
               <a href="https://github.com/rizzkiardi" className="flex gap-1  ">
-                <img
-                  src={assets.github_icon_white}
-                  alt="Logo Github"
-                  width="25"
-                />
+                <img src={assets.github_white} alt="Logo Github" width="25" />
               </a>
 
               <a

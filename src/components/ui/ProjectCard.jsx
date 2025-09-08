@@ -4,6 +4,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { assets } from "@/assets/assets";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ProjectCard = ({
   img,
@@ -11,6 +12,7 @@ const ProjectCard = ({
   description,
   techStack,
   linkGithub,
+  livePreview,
 }) => {
   const swiperRef = useRef(null);
   const hoverTimerRef = useRef(null);
@@ -73,21 +75,46 @@ const ProjectCard = ({
       </Swiper>
 
       {/* Modal */}
-      {isModalOpen && (
-        <div
-          onClick={handleCloseModal}
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-        >
-          <img
-            src={currentImg}
-            alt="Full"
-            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg"
-          />
-        </div>
-      )}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            key="backdrop"
+            onClick={handleCloseModal}
+            className="fixed inset-0 bg-[#191919]/85 flex items-center justify-center z-50 !m-0 !p-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="relative w-full max-w-6xl h-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={currentImg}
+                alt="Full"
+                className="w-full h-full rounded-lg shadow-lg"
+              />
+
+              {/* Tombol Close */}
+              <button
+                onClick={handleCloseModal}
+                className="absolute flex items-center -top-8 right-0 border text-white px-2 py-0 lg:px-3 rounded-sm transition"
+              >
+                <img className="w-5 lg:w-6" src={assets.cross_orange} alt="" />
+                <span className="mr-2 text-sm">Close</span>
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Nama & Deskripsi */}
-      <div>
+      <div className="">
         <h3 className="text-xl font-bold text-white">{nameProjects}</h3>
         <p className="text-sm text-white/80 mt-1 mb-5">{description}</p>
       </div>
@@ -104,17 +131,31 @@ const ProjectCard = ({
         ))}
       </div>
 
-      {/* Link Github */}
-      <div>
-        <a
-          href={linkGithub}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white text-xs w-[120px] flex gap-2 items-center border border-[#e4e4e4]/80 rounded-sm py-1 px-3"
-        >
-          <img src={assets.github_icon_white} alt="GitHub" width="20" />
-          View Code
-        </a>
+      <div className="flex justify-between ">
+        {/* Link Github */}
+        <div>
+          <a
+            href={linkGithub}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-xs w-[120px] flex gap-2 items-center border border-[#e4e4e4]/80 rounded-sm py-1 px-3"
+          >
+            <img src={assets.github_white} alt="GitHub" width="20" />
+            View Code
+          </a>
+        </div>
+
+        <div>
+          <a
+            href={livePreview}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white text-xs w-[120px] flex gap-2 items-center border border-[#e4e4e4]/80 rounded-sm py-1 px-3"
+          >
+            <img src={assets.eye_solid} alt="Icon eye" width="20" />
+            Live Preview
+          </a>
+        </div>
       </div>
     </div>
   );

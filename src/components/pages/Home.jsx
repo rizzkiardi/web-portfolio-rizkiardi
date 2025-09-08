@@ -13,25 +13,22 @@ const Home = () => {
   const half = Math.ceil(technology.length);
   const firstRow = technology.slice(0, half);
 
-  const ReviewCard = ({ img, name }) => {
+  const TechnologyCard = ({ img, name }) => {
     return (
       <section
         className={cn(
-          "relative h-full w-fit sm:w-36 cursor-pointer overflow-hidden rounded-xl border p-4 max-sm:gap-[1px]",
-          // light styles
-          "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-          // dark styles
-          "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+          "relative h-full w-fit sm:w-36 cursor-pointer overflow-hidden rounded-xl px-3 max-sm:gap-[1px]"
         )}
       >
         <div className="flex flex-col border border-[#e4e4e4]/20 rounded-sm py-2 px-2 items-center gap-2 max-sm:space-x-[5px]">
-          <img className="" width="75" alt="" src={img} />
+          <img className="" width="75" alt={name} src={img} />
           <p className="text-sm font-medium dark:text-white">{name}</p>
         </div>
       </section>
     );
   };
   // Marque
+
   return (
     <div className="font-GeneralSans-Regular">
       <header className="container max-w-6xl mx-auto my-3">
@@ -58,7 +55,7 @@ const Home = () => {
           initial={{ y: -20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-sm text-center my-3 md:text-md"
+          className="text-sm text-center my-3 md:text-md lg:text-lg"
         >
           Hi, I'm Rizki Ardi | Web Developer
         </motion.p>
@@ -70,13 +67,13 @@ const Home = () => {
           className="my-5 text-center font-semibold"
         >
           <h1 className="text-5xl">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF]/90  to-gray-500 text-4xl md:text-4xl lg:text-5xl xl:text-5xl">
-              Designing clean interfaces,
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF]/90  to-gray-500 text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+              Crafting Responsive and
             </span>
           </h1>
           <h1 className="text-5xl">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF]/90 to-gray-500 text-4xl md:text-4xl lg:text-5xl xl:text-5xl">
-              crafting seamless web experiences
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF]/90 to-gray-500 text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+              Modern Web Solutions
             </span>
           </h1>
         </motion.div>
@@ -111,7 +108,7 @@ const Home = () => {
       </div>
 
       <main className="">
-        {/* technology */}
+        {/* Start Technology Stack*/}
         <section className="technology w-full bg-[#2D2D2D]">
           <div className="tech-stack container max-w-6xl mx-auto py-10">
             <h2
@@ -129,7 +126,10 @@ const Home = () => {
               <Marquee pauseOnHover className="[--duration:20s]">
                 <div className="flex gap-2 md:gap-3">
                   {firstRow.map((technology, index) => (
-                    <ReviewCard key={technology.name + index} {...technology} />
+                    <TechnologyCard
+                      key={technology.name + index}
+                      {...technology}
+                    />
                   ))}
                 </div>
               </Marquee>
@@ -139,13 +139,13 @@ const Home = () => {
             {/* marque */}
           </div>
         </section>
-        {/* technology */}
+        {/* End Technology Stack*/}
 
-        {/* projects */}
-        <section className="projects " id="projects">
-          <div className="container max-w-6xl mx-auto">
+        {/* Start My Projects */}
+        <section className="projects" id="projects">
+          <div className="container max-w-6xl mx-auto py-10">
             <h2
-              className="text-white text-end text-2xl font-semibold pt-[50px] pb-[30px] max-lg:px-6"
+              className="text-white text-end text-2xl font-semibold pt-[30px] pb-[20px] max-lg:px-6"
               data-aos="fade-up"
               data-aos-duration="1000"
             >
@@ -166,7 +166,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* projects */}
+        {/* End My Projects */}
       </main>
 
       <Footer />
