@@ -191,7 +191,7 @@ export const projects = [
     description: "Aplikasi kalkulator sederhana.",
     techStack: ["HTML5", "CSS3", "JavaScript"],
     linkGithub: "https://github.com/rizzkiardi/calculator-app",
-    livePreview: "#",
+    livePreview: "https://kalkulator-website.vercel.app/",
   },
   {
     img: [assets.js_documentation],

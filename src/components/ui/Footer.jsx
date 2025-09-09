@@ -1,12 +1,12 @@
 import { assets } from "@/assets/assets";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 
 const Footer = () => {
   return (
     <div className="font-GeneralSans-Regular">
       <footer className="">
-        <div className="relative max-w-6xl mx-auto mt-10 py-3 text-sm border-t border-[#E4E4E4]/80  max-lg:mx-6">
+        <div className="relative max-w-6xl mx-auto mt-10 py-3 text-sm border-t border-[#E4E4E4]/80 max-lg:mx-6">
           <div className="flex justify-start items-center my-5 gap-5">
             <div className="border-r-2 border-[#E4E4E4]/80 pr-5">
               <p className="">&copy; Copyright - {new Date().getFullYear()}</p>
@@ -18,7 +18,7 @@ const Footer = () => {
                 rizkiardi
               </Link>
 
-              <a href="https://github.com/rizzkiardi" className="flex gap-1  ">
+              <a href="https://github.com/rizzkiardi" className="flex gap-1">
                 <img src={assets.github_white} alt="Logo Github" width="25" />
               </a>
 
